@@ -5,7 +5,16 @@
 import { Resend } from 'resend';
 import { SITE_CONFIG } from './constants';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy init — avoids crash at build time when RESEND_API_KEY is not yet set
+let _resend: Resend | null = null;
+function getResend(): Resend {
+  if (!_resend) {
+    const key = process.env.RESEND_API_KEY;
+    if (!key) throw new Error('RESEND_API_KEY is not configured');
+    _resend = new Resend(key);
+  }
+  return _resend;
+}
 
 interface LeadEmailData {
   customerName: string;
@@ -108,7 +117,7 @@ export async function sendPaymentLinkEmail(data: LeadEmailData) {
 </html>`;
 
   try {
-    const result = await resend.emails.send({
+    const result = await getResend().emails.send({
       from: `${SITE_CONFIG.name} <noreply@${SITE_CONFIG.domain}>`,
       to: data.email,
       subject,
@@ -143,7 +152,7 @@ export async function sendAdminNotification(data: LeadEmailData) {
 </html>`;
 
   try {
-    await resend.emails.send({
+    await getResend().emails.send({
       from: `IPTV Suisse Leads <noreply@${SITE_CONFIG.domain}>`,
       to: SITE_CONFIG.email,
       subject: `🔔 Nouveau Lead: ${data.customerName} – ${data.planName}`,
