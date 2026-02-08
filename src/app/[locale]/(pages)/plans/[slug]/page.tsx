@@ -161,7 +161,10 @@ export default function PlanPage() {
   const description = locale === 'fr' ? plan.description_fr : plan.description_de;
   const discount = plan.original_price ? getDiscount(plan.original_price, plan.price) : 0;
   const savings = plan.original_price ? (plan.original_price - plan.price).toFixed(2) : '0';
-  const otherPlans = PLANS.filter((p) => p.slug !== slug);
+  // Show other plans from same device group first, then other groups
+  const sameDevicePlans = PLANS.filter((p) => p.slug !== slug && p.devices === plan.devices);
+  const otherDevicePlans = PLANS.filter((p) => p.slug !== slug && p.devices !== plan.devices);
+  const otherPlans = [...sameDevicePlans, ...otherDevicePlans].slice(0, 4);
 
   const keyFeatures = [
     { icon: Tv, label: t('feat_channels'), desc: t('feat_channelsDesc') },
@@ -237,17 +240,27 @@ export default function PlanPage() {
             className="bg-bg rounded-2xl border border-border overflow-hidden"
           >
             <div className="p-6 sm:p-8 lg:p-12">
-              {/* Badge */}
+              {/* Badges */}
               <motion.div
                 initial={{ opacity: 0, x: -12 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.15 }}
-                className="inline-flex items-center gap-2 px-3 py-1 bg-swiss-red/8 rounded-full border border-swiss-red/15 mb-6"
+                className="flex flex-wrap items-center gap-2 mb-6"
               >
-                <div className="w-2 h-2 rounded-full bg-swiss-red animate-pulse" />
-                <span className="text-xs font-semibold text-swiss-red uppercase tracking-wide">
-                  {t('premiumPlan')}
-                </span>
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-swiss-red/8 rounded-full border border-swiss-red/15">
+                  <div className="w-2 h-2 rounded-full bg-swiss-red animate-pulse" />
+                  <span className="text-xs font-semibold text-swiss-red uppercase tracking-wide">
+                    {t('premiumPlan')}
+                  </span>
+                </div>
+                {plan.devices > 1 && (
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 rounded-full border border-blue-200">
+                    <Monitor className="w-3.5 h-3.5 text-blue-600" />
+                    <span className="text-xs font-semibold text-blue-700">
+                      {plan.devices} {locale === 'fr' ? 'écrans simultanés' : 'gleichzeitige Bildschirme'}
+                    </span>
+                  </div>
+                )}
               </motion.div>
 
               {/* Title + Price row */}
@@ -431,7 +444,7 @@ export default function PlanPage() {
                     <ul className="space-y-2.5">
                       {[
                         { icon: Clock, label: t('infoDuration'), value: t('infoDurationValue', { count: plan.duration }) },
-                        { icon: Monitor, label: t('infoConnections'), value: t('infoConnectionsValue') },
+                        { icon: Monitor, label: t('infoConnections'), value: t('infoConnectionsValue', { count: plan.devices }) },
                         { icon: Zap, label: t('infoActivation'), value: t('infoActivationValue') },
                         { icon: RefreshCw, label: t('infoRenewal'), value: t('infoRenewalValue') },
                       ].map((item) => (
@@ -605,7 +618,15 @@ export default function PlanPage() {
                   transition={{ delay: i * 0.1 }}
                   className="bg-bg rounded-xl border border-border hover:border-swiss-red/20 p-6 transition-all duration-300"
                 >
-                  <h3 className="text-lg font-bold text-text mb-3">{otherName}</h3>
+                  <div className="flex items-center gap-2 mb-3">
+                    <h3 className="text-lg font-bold text-text">{otherName}</h3>
+                    {p.devices > 1 && (
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-50 rounded text-[10px] font-semibold text-blue-700 border border-blue-200">
+                        <Monitor className="w-3 h-3" />
+                        {p.devices}
+                      </span>
+                    )}
+                  </div>
                   <div className="mb-4">
                     {p.original_price && (
                       <div className="text-sm text-text-muted line-through mb-0.5">

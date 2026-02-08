@@ -127,7 +127,7 @@ export default function JsonLd({ locale }: JsonLdProps) {
       opens: '00:00',
       closes: '23:59',
     },
-    priceRange: 'CHF 25 - CHF 120',
+    priceRange: 'CHF 35.99 - CHF 179.99',
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: '4.8',
