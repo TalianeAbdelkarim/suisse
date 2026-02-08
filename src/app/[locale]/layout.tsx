@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { Inter } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import { SITE_CONFIG } from '@/lib/constants';
 import Header from '@/components/layout/Header';
@@ -10,13 +9,6 @@ import Footer from '@/components/layout/Footer';
 import WhatsAppButton from '@/components/ui/WhatsAppButton';
 import CrispChat from '@/components/ui/CrispChat';
 import GoogleAnalytics from '@/components/ui/GoogleAnalytics';
-import '@/app/globals.css';
-
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-});
 
 type Props = {
   children: React.ReactNode;
@@ -90,23 +82,15 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={inter.variable} suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <meta name="theme-color" content="#D52B1E" />
-      </head>
-      <body className="bg-bg text-text font-body antialiased">
-        <NextIntlClientProvider messages={messages}>
-          <GoogleAnalytics />
-          <Header />
-          <main className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
-          <WhatsAppButton />
-          <CrispChat />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <GoogleAnalytics />
+      <Header />
+      <main className="min-h-screen bg-bg text-text">
+        {children}
+      </main>
+      <Footer />
+      <WhatsAppButton />
+      <CrispChat />
+    </NextIntlClientProvider>
   );
 }
