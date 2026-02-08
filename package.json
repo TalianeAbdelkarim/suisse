@@ -21,6 +21,9 @@
     "react-dom": "19.2.3",
     "resend": "^6.9.1"
   },
+  "engines": {
+    "node": ">=20.x <=22.x"
+  },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
