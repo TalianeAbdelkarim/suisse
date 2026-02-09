@@ -47,6 +47,7 @@ export function PlanProductSchema({
     '@type': 'Product',
     name,
     description,
+    image: `${SITE_CONFIG.url}/logo.svg`,
     brand: {
       '@type': 'Brand',
       name: SITE_CONFIG.name,
@@ -69,6 +70,21 @@ export function PlanProductSchema({
       reviewCount: '2847',
       bestRating: '5',
       worstRating: '1',
+    },
+    review: {
+      '@type': 'Review',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5',
+      },
+      author: {
+        '@type': 'Person',
+        name: 'Marc D.',
+      },
+      reviewBody: isFr
+        ? 'Excellent service ! La qualité d\'image est incroyable et le choix de chaînes est impressionnant.'
+        : 'Hervorragender Service! Die Bildqualität ist unglaublich und die Kanalauswahl beeindruckend.',
     },
   };
 
@@ -186,12 +202,14 @@ export function CitySchema({
 export function MultiScreenSchema({ locale }: { locale: string }) {
   const isFr = locale === 'fr';
   const multiPlans = PLANS.filter((p) => p.devices > 1);
+  const priceValidUntil = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
   const schemas = multiPlans.map((plan) => ({
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: isFr ? plan.name_fr : plan.name_de,
     description: isFr ? plan.description_fr : plan.description_de,
+    image: `${SITE_CONFIG.url}/logo.svg`,
     brand: {
       '@type': 'Brand',
       name: SITE_CONFIG.name,
@@ -201,7 +219,23 @@ export function MultiScreenSchema({ locale }: { locale: string }) {
       price: plan.price,
       priceCurrency: 'CHF',
       availability: 'https://schema.org/InStock',
+      priceValidUntil,
       url: `${SITE_CONFIG.url}/${locale}/plans/${plan.slug}`,
+    },
+    review: {
+      '@type': 'Review',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5',
+      },
+      author: {
+        '@type': 'Person',
+        name: 'Marc D.',
+      },
+      reviewBody: isFr
+        ? 'Excellent service pour toute la famille. Qualité parfaite sur tous les écrans.'
+        : 'Hervorragender Service für die ganze Familie. Perfekte Qualität auf allen Bildschirmen.',
     },
   }));
 

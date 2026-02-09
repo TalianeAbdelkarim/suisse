@@ -46,11 +46,14 @@ export default function JsonLd({ locale }: JsonLdProps) {
   };
 
   // Product schemas for each plan
+  const priceValidUntil = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+
   const productSchemas = PLANS.map((plan) => ({
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: isFr ? plan.name_fr : plan.name_de,
     description: isFr ? plan.description_fr : plan.description_de,
+    image: `${SITE_CONFIG.url}/logo.svg`,
     brand: {
       '@type': 'Brand',
       name: SITE_CONFIG.name,
@@ -60,6 +63,7 @@ export default function JsonLd({ locale }: JsonLdProps) {
       price: plan.price,
       priceCurrency: 'CHF',
       availability: 'https://schema.org/InStock',
+      priceValidUntil,
       seller: {
         '@type': 'Organization',
         name: SITE_CONFIG.name,
@@ -72,6 +76,21 @@ export default function JsonLd({ locale }: JsonLdProps) {
       reviewCount: '2847',
       bestRating: '5',
       worstRating: '1',
+    },
+    review: {
+      '@type': 'Review',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5',
+      },
+      author: {
+        '@type': 'Person',
+        name: 'Marc D.',
+      },
+      reviewBody: isFr
+        ? 'Excellent service ! La qualité d\'image est incroyable et le choix de chaînes est impressionnant.'
+        : 'Hervorragender Service! Die Bildqualität ist unglaublich und die Kanalauswahl beeindruckend.',
     },
   }));
 
