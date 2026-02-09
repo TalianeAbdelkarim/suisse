@@ -2,11 +2,12 @@
 
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
+import { Shield, Zap, Award } from 'lucide-react';
 
 const ITEMS = [
-  { key: 'swiss', emoji: '🇨🇭' },
-  { key: 'fast', emoji: '⚡' },
-  { key: 'quality', emoji: '🏆' },
+  { key: 'swiss', icon: Shield },
+  { key: 'fast', icon: Zap },
+  { key: 'quality', icon: Award },
 ] as const;
 
 export default function WhyUs() {
@@ -28,7 +29,7 @@ export default function WhyUs() {
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          {ITEMS.map(({ key, emoji }, i) => (
+          {ITEMS.map(({ key, icon: Icon }, i) => (
             <motion.div
               key={key}
               initial={{ opacity: 0, y: 16 }}
@@ -37,7 +38,9 @@ export default function WhyUs() {
               transition={{ delay: i * 0.1 }}
               className="text-center"
             >
-              <div className="text-4xl mb-4">{emoji}</div>
+              <div className="w-12 h-12 rounded-full bg-swiss-red/8 flex items-center justify-center mx-auto mb-4">
+                <Icon className="w-5 h-5 text-swiss-red" />
+              </div>
               <h3 className="text-lg font-bold text-text mb-2">{t(`${key}.title`)}</h3>
               <p className="text-sm text-text-muted leading-relaxed">{t(`${key}.description`)}</p>
             </motion.div>
