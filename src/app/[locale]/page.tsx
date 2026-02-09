@@ -3,6 +3,7 @@ import Hero from '@/components/sections/Hero';
 import Features from '@/components/sections/Features';
 import WhyUs from '@/components/sections/WhyUs';
 import Pricing from '@/components/sections/Pricing';
+import MultiScreenBanner from '@/components/sections/MultiScreenBanner';
 import Testimonials from '@/components/sections/Testimonials';
 import FAQ from '@/components/sections/FAQ';
 import CTA from '@/components/sections/CTA';
@@ -23,6 +24,7 @@ export default async function HomePage({ params }: Props) {
       <Features />
       <WhyUs />
       <Pricing />
+      <MultiScreenBanner />
       <Testimonials />
       <FAQ />
       <CTA />
