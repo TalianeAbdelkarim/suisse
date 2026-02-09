@@ -13,7 +13,7 @@ export default async function OGImage({ params }: { params: { locale: string } }
     (
       <div
         style={{
-          background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)',
+          background: 'linear-gradient(135deg, #1a0000 0%, #3d0000 50%, #1a0000 100%)',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -36,14 +36,43 @@ export default async function OGImage({ params }: { params: { locale: string } }
           }}
         />
 
+        {/* Swiss cross background watermark */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 300,
+            height: 300,
+            opacity: 0.04,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <div style={{
+            width: 300,
+            height: 300,
+            background: '#E31937',
+            borderRadius: 30,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 200,
+            color: 'white',
+            fontWeight: 900,
+          }}>+</div>
+        </div>
+
         {/* Logo area */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 24 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 32 }}>
           <div
             style={{
-              width: 56,
-              height: 56,
+              width: 64,
+              height: 64,
               background: '#E31937',
-              borderRadius: 10,
+              borderRadius: 14,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -52,25 +81,25 @@ export default async function OGImage({ params }: { params: { locale: string } }
             <div
               style={{
                 color: 'white',
-                fontSize: 28,
+                fontSize: 36,
                 fontWeight: 900,
               }}
             >
               +
             </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'baseline' }}>
-            <span style={{ fontSize: 48, fontWeight: 900, color: '#111827' }}>IPTV</span>
-            <span style={{ fontSize: 48, fontWeight: 900, color: '#E31937' }}>SUISSE</span>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
+            <span style={{ fontSize: 56, fontWeight: 900, color: '#ffffff' }}>IPTV</span>
+            <span style={{ fontSize: 56, fontWeight: 900, color: '#E31937' }}>SUISSE</span>
           </div>
         </div>
 
         {/* Title */}
         <div
           style={{
-            fontSize: 36,
+            fontSize: 40,
             fontWeight: 800,
-            color: '#111827',
+            color: '#ffffff',
             marginBottom: 16,
             textAlign: 'center',
           }}
@@ -83,11 +112,11 @@ export default async function OGImage({ params }: { params: { locale: string } }
         {/* Subtitle */}
         <div
           style={{
-            fontSize: 20,
-            color: '#6b7280',
+            fontSize: 22,
+            color: '#d1d5db',
             textAlign: 'center',
             maxWidth: 800,
-            marginBottom: 32,
+            marginBottom: 36,
           }}
         >
           {isFr
@@ -103,9 +132,9 @@ export default async function OGImage({ params }: { params: { locale: string } }
             gap: 8,
             background: '#E31937',
             color: 'white',
-            padding: '12px 32px',
-            borderRadius: 12,
-            fontSize: 22,
+            padding: '14px 40px',
+            borderRadius: 14,
+            fontSize: 24,
             fontWeight: 700,
           }}
         >
@@ -116,9 +145,10 @@ export default async function OGImage({ params }: { params: { locale: string } }
         <div
           style={{
             position: 'absolute',
-            bottom: 24,
-            fontSize: 16,
-            color: '#9ca3af',
+            bottom: 28,
+            fontSize: 18,
+            color: '#6b7280',
+            letterSpacing: 1,
           }}
         >
           iptvsuisse.co

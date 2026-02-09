@@ -4,6 +4,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { useParams } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import {
   Check,
   ArrowLeft,
@@ -263,14 +264,26 @@ export default function PlanPageClient() {
                 )}
               </motion.div>
 
-              {/* Title + Price row */}
+              {/* Product Image + Title + Price row */}
               <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-                {/* Title */}
+                {/* Title + Image */}
                 <motion.div
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
+                  className="flex-1"
                 >
+                  {/* Plan product image */}
+                  <div className="mb-6 rounded-xl overflow-hidden border border-border bg-gradient-to-br from-[#2a0000] to-[#1a0000] max-w-md">
+                    <Image
+                      src={plan.image}
+                      alt={name}
+                      width={1024}
+                      height={683}
+                      className="w-full h-auto object-cover"
+                      priority
+                    />
+                  </div>
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text leading-tight tracking-tight mb-3">
                     {name}
                   </h1>

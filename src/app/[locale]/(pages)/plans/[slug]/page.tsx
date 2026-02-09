@@ -48,11 +48,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: SITE_CONFIG.name,
       locale: isFr ? 'fr_CH' : 'de_CH',
       type: 'website',
+      images: [
+        {
+          url: `${SITE_CONFIG.url}${plan.image}`,
+          width: 1024,
+          height: 683,
+          alt: name,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description: metaDescription,
+      images: [`${SITE_CONFIG.url}${plan.image}`],
     },
     alternates: {
       canonical: `${SITE_CONFIG.url}/${locale}/plans/${slug}`,

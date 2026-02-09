@@ -43,11 +43,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: SITE_CONFIG.name,
       locale: locale === 'fr' ? 'fr_CH' : 'de_CH',
       type: 'website',
+      images: [
+        {
+          url: `${SITE_CONFIG.url}/images/og-featured.png`,
+          width: 1024,
+          height: 683,
+          alt: locale === 'fr'
+            ? 'IPTV Suisse - Service IPTV Premium avec 15000+ chaînes HD'
+            : 'IPTV Schweiz - Premium IPTV-Service mit 15000+ HD-Kanälen',
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: meta.title,
       description: meta.description,
+      images: [`${SITE_CONFIG.url}/images/og-featured.png`],
     },
     alternates: {
       canonical: `${SITE_CONFIG.url}/${locale}`,

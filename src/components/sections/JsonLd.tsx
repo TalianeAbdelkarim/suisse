@@ -53,7 +53,7 @@ export default function JsonLd({ locale }: JsonLdProps) {
     '@type': 'Product',
     name: isFr ? plan.name_fr : plan.name_de,
     description: isFr ? plan.description_fr : plan.description_de,
-    image: `${SITE_CONFIG.url}/logo.svg`,
+    image: `${SITE_CONFIG.url}${plan.image}`,
     brand: {
       '@type': 'Brand',
       name: SITE_CONFIG.name,
