@@ -279,8 +279,7 @@
     "titleHighlight": "Multi-Bildschirm",
     "description": "Teilen Sie Ihr IPTV-Abo mit der ganzen Familie. Schauen Sie gleichzeitig auf 2, 3 oder 4 verschiedenen Geräten in Premium-Qualität.",
     "cta": "Multi-Bildschirm-Pakete ansehen",
-    "screenOption": "{count, plural, =2 {2 gleichzeitige Bildschirme} =3 {3 gleichzeitige Bildschirme} other {4 gleichzeitige Bildschirme}}",
-    "familyNote": "Perfekt für die ganze Familie"
+    "screenOption": "{count, plural, =2 {2 gleichzeitige Bildschirme} =3 {3 gleichzeitige Bildschirme} other {4 gleichzeitige Bildschirme}}"
   },
   "multiEcrans": {
     "backToPlans": "Zurück zu den Angeboten",

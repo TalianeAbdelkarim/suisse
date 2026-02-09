@@ -279,8 +279,7 @@
     "titleHighlight": "Multi-Écrans",
     "description": "Partagez votre abonnement IPTV avec toute la famille. Regardez simultanément sur 2, 3 ou 4 appareils différents avec la même qualité premium.",
     "cta": "Voir les forfaits multi-écrans",
-    "screenOption": "{count, plural, =2 {2 écrans simultanés} =3 {3 écrans simultanés} other {4 écrans simultanés}}",
-    "familyNote": "Parfait pour toute la famille"
+    "screenOption": "{count, plural, =2 {2 écrans simultanés} =3 {3 écrans simultanés} other {4 écrans simultanés}}"
   },
   "multiEcrans": {
     "backToPlans": "Retour aux offres",
