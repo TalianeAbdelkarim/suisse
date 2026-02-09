@@ -13,7 +13,7 @@ export default function JsonLd({ locale }: JsonLdProps) {
     '@type': 'Organization',
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.url,
-    logo: `${SITE_CONFIG.url}/logo.png`,
+    logo: `${SITE_CONFIG.url}/logo.svg`,
     description: isFr
       ? 'Fournisseur de services IPTV premium en Suisse avec plus de 15\'000 chaînes HD et 4K.'
       : 'Premium IPTV-Dienstleister in der Schweiz mit über 15\'000 HD- und 4K-Kanälen.',

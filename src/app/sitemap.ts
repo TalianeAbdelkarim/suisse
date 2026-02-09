@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { SITE_CONFIG, PLANS } from '@/lib/constants';
+import { ALL_CITY_SLUGS } from '@/lib/cities';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_CONFIG.url;
@@ -9,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Static pages
   const staticPages = [
     { path: '', priority: 1.0, changeFrequency: 'weekly' as const },
+    { path: '/multi-ecrans', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/faq', priority: 0.8, changeFrequency: 'monthly' as const },
     { path: '/installation', priority: 0.8, changeFrequency: 'monthly' as const },
     { path: '/about', priority: 0.6, changeFrequency: 'monthly' as const },
@@ -16,9 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/privacy', priority: 0.3, changeFrequency: 'yearly' as const },
     { path: '/terms', priority: 0.3, changeFrequency: 'yearly' as const },
   ];
-
-  // City landing pages for local SEO
-  const cities = ['geneve', 'zurich', 'lausanne', 'bern', 'basel'];
 
   const entries: MetadataRoute.Sitemap = [];
 
@@ -56,8 +55,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       });
     }
 
-    // City landing pages
-    for (const city of cities) {
+    // City landing pages (all cities from shared data)
+    for (const city of ALL_CITY_SLUGS) {
       entries.push({
         url: `${baseUrl}/${locale}/iptv-${city}`,
         lastModified: now,

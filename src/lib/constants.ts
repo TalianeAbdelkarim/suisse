@@ -16,7 +16,11 @@ export const SITE_CONFIG = {
 } as const;
 
 // City pages for internal linking & SEO
-export const CITIES = ['geneve', 'zurich', 'lausanne', 'bern', 'basel'] as const;
+export const CITIES = [
+  'geneve', 'zurich', 'lausanne', 'bern', 'basel',
+  'winterthur', 'st-gallen', 'lugano', 'biel', 'luzern',
+  'fribourg', 'neuchatel', 'thun',
+] as const;
 
 export const STATS = {
   channels: '15,000+',

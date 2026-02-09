@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "IPTV Schweiz - Bester IPTV-Service in der Schweiz | 15'000+ HD-Kanäle",
-    "description": "Premium IPTV-Abo Schweiz mit +15'000 HD/4K-Kanälen, Filmen, Serien und Replay. Aktivierung in 2h, 24/7 Support in der Schweiz. Ab 25 CHF."
+    "description": "Bestes IPTV Schweiz Abo mit +15'000 HD/4K-Kanälen, Filmen, Serien und Replay. Aktivierung in 2h, 24/7 Support in der Schweiz. Ab 35.99 CHF."
   },
   "nav": {
     "home": "Startseite",
@@ -16,10 +16,10 @@
   "hero": {
     "badge": "Service #1 in der Schweiz",
     "swissBadge": "Premium-Service mit Sitz in der Schweiz",
-    "title": "Ihr Premium",
+    "title": "IPTV Schweiz —",
     "titleHighlight": "IPTV-Abonnement",
-    "titleEnd": "in der Schweiz",
-    "subtitle": "Geniessen Sie über 15'000 Kanäle in HD- und 4K-Qualität, 40'000+ Filme, 17'000+ Serien und Replay auf allen Ihren Geräten. 24/7 deutschsprachiger Kundensupport.",
+    "titleEnd": "Premium",
+    "subtitle": "Der beste IPTV-Service in der Schweiz: +15'000 Kanäle in HD und 4K, 40'000+ Filme, 17'000+ Serien und Replay auf allen Geräten. IPTV Abo Schweiz mit 24/7 Support.",
     "ctaPrimary": "Angebote entdecken",
     "ctaSecondary": "So funktioniert's",
     "trust": "Über 15'000 zufriedene Kunden in der Schweiz"
@@ -33,7 +33,7 @@
   },
   "features": {
     "title": "Alles was Sie brauchen",
-    "subtitle": "Ein kompletter IPTV-Service für die Schweiz",
+    "subtitle": "Ein kompletter IPTV Schweiz Service mit Schweizer Kanälen, Replay und VOD",
     "channels": {
       "title": "15'000+ Kanäle",
       "description": "Alle Schweizer Kanäle (SRF, RTS, RSI), deutsche, französische und internationale Kanäle in HD- und 4K-Qualität."
@@ -77,9 +77,9 @@
     }
   },
   "pricing": {
-    "title": "Unsere Premium",
-    "titleHighlight": "Abonnements",
-    "subtitle": "Wählen Sie das Paket, das zu Ihnen passt, und geniessen Sie das beste TV-Streaming der Schweiz.",
+    "title": "IPTV Abo Schweiz",
+    "titleHighlight": "— Unsere Angebote",
+    "subtitle": "Wählen Sie Ihr günstiges IPTV Schweiz Abo und geniessen Sie das beste TV-Streaming.",
     "popular": "Beliebteste",
     "perMonth": "/Monat",
     "duration": "{count} Monate",
@@ -137,7 +137,7 @@
   },
   "cta": {
     "title": "Bereit loszulegen?",
-    "subtitle": "Schliessen Sie sich über 15'000 zufriedenen Kunden in der Schweiz an und geniessen Sie den besten verfügbaren IPTV-Service.",
+    "subtitle": "Schliessen Sie sich über 15'000 zufriedenen Kunden an und geniessen Sie das beste IPTV Schweiz zum besten Preis.",
     "button": "Angebote ansehen",
     "guarantee": "Aktivierung in 2h • 24/7 Support • Geld-zurück-Garantie"
   },

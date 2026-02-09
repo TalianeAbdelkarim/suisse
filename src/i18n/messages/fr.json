@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "IPTV Suisse - Meilleur Service IPTV en Suisse | 15'000+ Chaînes HD",
-    "description": "Abonnement IPTV Suisse premium avec +15'000 chaînes HD/4K, films, séries et replay. Activation en 2h, support 24/7 basé en Suisse. Dès 25 CHF."
+    "description": "Meilleur abonnement IPTV Suisse avec +15'000 chaînes HD/4K, films, séries et replay. Activation en 2h, support 24/7 basé en Suisse. Dès 35.99 CHF."
   },
   "nav": {
     "home": "Accueil",
@@ -16,10 +16,10 @@
   "hero": {
     "badge": "Service #1 en Suisse",
     "swissBadge": "Service Premium basé en Suisse",
-    "title": "Votre Abonnement",
-    "titleHighlight": "IPTV Premium",
-    "titleEnd": "en Suisse",
-    "subtitle": "Profitez de plus de 15'000 chaînes en qualité HD et 4K, 40'000+ films, 17'000+ séries et le replay sur tous vos appareils. Support client francophone 24/7.",
+    "title": "IPTV Suisse —",
+    "titleHighlight": "Abonnement IPTV",
+    "titleEnd": "Premium",
+    "subtitle": "Le meilleur service IPTV en Suisse : +15'000 chaînes HD et 4K, 40'000+ films, 17'000+ séries et le replay sur tous vos appareils. Abonnement IPTV Suisse pas cher avec support 24/7.",
     "ctaPrimary": "Découvrir nos offres",
     "ctaSecondary": "Comment ça marche",
     "trust": "Plus de 15'000 clients satisfaits en Suisse"
@@ -33,7 +33,7 @@
   },
   "features": {
     "title": "Tout ce dont vous avez besoin",
-    "subtitle": "Un service IPTV complet pensé pour la Suisse",
+    "subtitle": "Un service IPTV Suisse complet avec chaînes suisses, replay et VOD",
     "channels": {
       "title": "15'000+ Chaînes",
       "description": "Toutes les chaînes suisses (RTS, SRF, RSI), françaises, allemandes et internationales en qualité HD et 4K."
@@ -77,9 +77,9 @@
     }
   },
   "pricing": {
-    "title": "Nos Abonnements",
-    "titleHighlight": "Premium",
-    "subtitle": "Choisissez le forfait qui vous convient et profitez du meilleur streaming TV en Suisse.",
+    "title": "Abonnement IPTV Suisse",
+    "titleHighlight": "— Nos Offres",
+    "subtitle": "Choisissez votre abonnement IPTV Suisse pas cher et profitez du meilleur streaming TV.",
     "popular": "Plus Populaire",
     "perMonth": "/mois",
     "duration": "{count} mois",
@@ -137,7 +137,7 @@
   },
   "cta": {
     "title": "Prêt à commencer ?",
-    "subtitle": "Rejoignez plus de 15'000 clients satisfaits en Suisse et profitez du meilleur service IPTV disponible.",
+    "subtitle": "Rejoignez plus de 15'000 clients satisfaits et profitez du meilleur IPTV Suisse au meilleur prix.",
     "button": "Voir nos offres",
     "guarantee": "Activation en 2h • Support 24/7 • Satisfait ou remboursé"
   },

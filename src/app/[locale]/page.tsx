@@ -6,6 +6,7 @@ import Pricing from '@/components/sections/Pricing';
 import MultiScreenBanner from '@/components/sections/MultiScreenBanner';
 import Testimonials from '@/components/sections/Testimonials';
 import FAQ from '@/components/sections/FAQ';
+import CityLinks from '@/components/sections/CityLinks';
 import CTA from '@/components/sections/CTA';
 import JsonLd from '@/components/sections/JsonLd';
 
@@ -27,6 +28,7 @@ export default async function HomePage({ params }: Props) {
       <MultiScreenBanner />
       <Testimonials />
       <FAQ />
+      <CityLinks />
       <CTA />
     </>
   );
