@@ -1,18 +1,15 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { MapPin, Check, ArrowRight, Star, Tv, Zap, Headphones, Wifi, Globe, Radio } from 'lucide-react';
+import { MapPin, Check, ArrowRight, Star, Tv, Zap, Headphones, Wifi, Globe } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { PLANS, STATS } from '@/lib/constants';
 import { formatPrice, getDiscount } from '@/lib/utils';
 import { CITIES_DATA, ALL_CITY_SLUGS } from '@/lib/cities';
 
-export default function CityPageClient() {
+export default function CityPageClient({ citySlug }: { citySlug: string }) {
   const locale = useLocale();
-  const params = useParams();
-  const citySlug = params.city as string;
   const t = useTranslations('pricing');
 
   const city = CITIES_DATA[citySlug];
@@ -31,7 +28,7 @@ export default function CityPageClient() {
 
   const benefits = locale === 'fr'
     ? [
-        'Toutes les chaînes suisses (RTS, SRF, RSI) + internationales',
+        'Toutes les chaînes suisses et internationales',
         'Qualité HD et 4K sur tous vos appareils',
         'Replay et VOD avec 40\'000+ films et séries',
         `Support client disponible 24/7 pour les résidents de ${city.name}`,
@@ -39,7 +36,7 @@ export default function CityPageClient() {
         'Compatible Smart TV, Android, iOS, Fire Stick et plus',
       ]
     : [
-        'Alle Schweizer Kanäle (SRF, RTS, RSI) + international',
+        'Alle Schweizer und internationalen Kanäle',
         'HD- und 4K-Qualität auf allen Ihren Geräten',
         'Replay und VOD mit 40\'000+ Filmen und Serien',
         `24/7 Kundensupport für Einwohner von ${city.name}`,
@@ -243,38 +240,6 @@ export default function CityPageClient() {
                   <Check className="w-3 h-3" />
                   {locale === 'fr' ? 'Compatible' : 'Kompatibel'}
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Popular Channels Section */}
-        <div className="mb-16">
-          <h2 className="text-xl font-bold text-text mb-4 flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-swiss-red/8 flex items-center justify-center">
-              <Radio className="w-4 h-4 text-swiss-red" />
-            </div>
-            {locale === 'fr'
-              ? `Chaînes populaires à ${city.name}`
-              : `Beliebte Kanäle in ${city.name}`}
-          </h2>
-          <p className="text-sm text-text-secondary leading-relaxed mb-4">
-            {locale === 'fr'
-              ? `Avec votre abonnement IPTV Suisse, accédez à toutes les chaînes suisses et internationales populaires à ${city.name}.`
-              : `Mit Ihrem IPTV Schweiz Abo erhalten Sie Zugang zu allen beliebten Schweizer und internationalen Kanälen in ${city.name}.`}
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {[
-              { name: 'RTS', desc: locale === 'fr' ? 'TV Suisse Romande' : 'Westschweizer TV' },
-              { name: 'SRF', desc: locale === 'fr' ? 'TV Suisse Alémanique' : 'Deutschschweizer TV' },
-              { name: 'RSI', desc: locale === 'fr' ? 'TV Suisse Italienne' : 'Italienisches Schweizer TV' },
-              { name: 'TF1 / France 2', desc: locale === 'fr' ? 'Chaînes françaises' : 'Französische Kanäle' },
-              { name: 'ARD / ZDF', desc: locale === 'fr' ? 'Chaînes allemandes' : 'Deutsche Kanäle' },
-              { name: 'Sky Sport / beIN', desc: locale === 'fr' ? 'Sport en direct' : 'Live-Sport' },
-            ].map((ch) => (
-              <div key={ch.name} className="bg-bg rounded-lg border border-border p-3">
-                <div className="text-sm font-semibold text-text">{ch.name}</div>
-                <div className="text-xs text-text-muted mt-0.5">{ch.desc}</div>
               </div>
             ))}
           </div>

@@ -157,13 +157,13 @@ export const CITIES_DATA: Record<string, CityData> = {
       title: 'IPTV Lugano - Abonnement IPTV à Lugano | Dès 35.99 CHF',
       description: 'Service IPTV premium à Lugano. +15\'000 chaînes HD/4K, chaînes italiennes incluses. Activation en 2h. Abonnement IPTV Lugano dès 35.99 CHF.',
       h1: 'IPTV Lugano — Votre Service IPTV Premium',
-      intro: 'Le meilleur service IPTV à Lugano et au Tessin. Plus de 15\'000 chaînes incluant toutes les chaînes suisses (RSI, RTS, SRF), italiennes et internationales en HD et 4K. Activation en 2 heures pour tous les résidents de Lugano, Paradiso et Massagno.',
+      intro: 'Le meilleur service IPTV à Lugano et au Tessin. Plus de 15\'000 chaînes incluant toutes les chaînes suisses, italiennes et internationales en HD et 4K. Activation en 2 heures pour tous les résidents de Lugano, Paradiso et Massagno.',
     },
     meta_de: {
       title: 'IPTV Lugano - IPTV-Abo in Lugano | Ab 35.99 CHF',
       description: 'Premium IPTV-Service in Lugano. +15\'000 HD/4K-Kanäle, italienische Kanäle inklusive. Aktivierung in 2h. IPTV-Abo Lugano ab 35.99 CHF.',
       h1: 'IPTV Lugano — Ihr Premium IPTV-Service',
-      intro: 'Der beste IPTV-Service in Lugano und im Tessin. Über 15\'000 Kanäle inklusive aller Schweizer Kanäle (RSI, RTS, SRF), italienischer und internationaler Kanäle in HD und 4K. Aktivierung in 2 Stunden für alle Einwohner von Lugano, Paradiso und Massagno.',
+      intro: 'Der beste IPTV-Service in Lugano und im Tessin. Über 15\'000 Kanäle inklusive aller Schweizer, italienischer und internationaler Kanäle in HD und 4K. Aktivierung in 2 Stunden für alle Einwohner von Lugano, Paradiso und Massagno.',
     },
   },
   biel: {

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { SITE_CONFIG } from '@/lib/constants';
 import { CITIES_DATA, ALL_CITY_SLUGS } from '@/lib/cities';
@@ -6,18 +7,27 @@ import { BreadcrumbSchema, CitySchema, FAQSchema } from '@/components/seo/Schema
 import CityPageClient from './CityPageClient';
 
 type Props = {
-  params: Promise<{ locale: string; city: string }>;
+  params: Promise<{ locale: string; cityPath: string }>;
 };
 
+// Parse "iptv-geneve" → "geneve"
+function parseCitySlug(cityPath: string): string | null {
+  if (cityPath.startsWith('iptv-')) {
+    return cityPath.slice(5); // Remove "iptv-" prefix
+  }
+  return null;
+}
+
 export async function generateStaticParams() {
-  return ALL_CITY_SLUGS.map((city) => ({ city }));
+  return ALL_CITY_SLUGS.map((city) => ({ cityPath: `iptv-${city}` }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale, city: citySlug } = await params;
-  const city = CITIES_DATA[citySlug];
+  const { locale, cityPath } = await params;
+  const citySlug = parseCitySlug(cityPath);
+  const city = citySlug ? CITIES_DATA[citySlug] : null;
 
-  if (!city) {
+  if (!city || !citySlug) {
     return { title: 'City Not Found' };
   }
 
@@ -54,12 +64,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function CityPage({ params }: Props) {
-  const { locale, city: citySlug } = await params;
+  const { locale, cityPath } = await params;
   setRequestLocale(locale);
+
+  const citySlug = parseCitySlug(cityPath);
+
+  // If the path doesn't start with "iptv-" or city doesn't exist, show 404
+  if (!citySlug || !CITIES_DATA[citySlug]) {
+    notFound();
+  }
 
   const isFr = locale === 'fr';
   const city = CITIES_DATA[citySlug];
-  const cityName = city?.name ?? citySlug;
+  const cityName = city.name;
 
   const cityFaqs = isFr
     ? [
@@ -83,7 +100,7 @@ export default async function CityPage({ params }: Props) {
       />
       <CitySchema locale={locale} citySlug={citySlug} />
       <FAQSchema faqs={cityFaqs} />
-      <CityPageClient />
+      <CityPageClient citySlug={citySlug} />
     </>
   );
 }
