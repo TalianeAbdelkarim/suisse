@@ -2,6 +2,16 @@ import { MetadataRoute } from 'next';
 import { SITE_CONFIG, PLANS } from '@/lib/constants';
 import { ALL_CITY_SLUGS } from '@/lib/cities';
 
+// Helper: build URL for a given locale + path
+// French (default) → no prefix: /path
+// German → /de/path
+function localeUrl(baseUrl: string, locale: string, path: string) {
+  if (locale === 'fr') {
+    return `${baseUrl}${path}`;
+  }
+  return `${baseUrl}/${locale}${path}`;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_CONFIG.url;
   const locales = SITE_CONFIG.locales;
@@ -26,13 +36,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Static pages
     for (const page of staticPages) {
       entries.push({
-        url: `${baseUrl}/${locale}${page.path}`,
+        url: localeUrl(baseUrl, locale, page.path),
         lastModified: now,
         changeFrequency: page.changeFrequency,
         priority: page.priority,
         alternates: {
           languages: {
-            'fr-CH': `${baseUrl}/fr${page.path}`,
+            'fr-CH': `${baseUrl}${page.path}`,
             'de-CH': `${baseUrl}/de${page.path}`,
           },
         },
@@ -42,29 +52,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Plan pages
     for (const plan of PLANS) {
       entries.push({
-        url: `${baseUrl}/${locale}/plans/${plan.slug}`,
+        url: localeUrl(baseUrl, locale, `/plans/${plan.slug}`),
         lastModified: now,
         changeFrequency: 'weekly',
         priority: 0.9,
         alternates: {
           languages: {
-            'fr-CH': `${baseUrl}/fr/plans/${plan.slug}`,
+            'fr-CH': `${baseUrl}/plans/${plan.slug}`,
             'de-CH': `${baseUrl}/de/plans/${plan.slug}`,
           },
         },
       });
     }
 
-    // City landing pages (all cities from shared data)
+    // City landing pages
     for (const city of ALL_CITY_SLUGS) {
       entries.push({
-        url: `${baseUrl}/${locale}/iptv-${city}`,
+        url: localeUrl(baseUrl, locale, `/iptv-${city}`),
         lastModified: now,
         changeFrequency: 'monthly',
         priority: 0.85,
         alternates: {
           languages: {
-            'fr-CH': `${baseUrl}/fr/iptv-${city}`,
+            'fr-CH': `${baseUrl}/iptv-${city}`,
             'de-CH': `${baseUrl}/de/iptv-${city}`,
           },
         },

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { SITE_CONFIG } from '@/lib/constants';
+import { localeUrl } from '@/lib/utils';
 import { CITIES_DATA, ALL_CITY_SLUGS } from '@/lib/cities';
 import { BreadcrumbSchema, CitySchema, FAQSchema } from '@/components/seo/SchemaMarkup';
 import CityPageClient from './CityPageClient';
@@ -43,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: meta.title,
       description: meta.description,
-      url: `${SITE_CONFIG.url}/${locale}/iptv-${citySlug}`,
+      url: locale === 'fr' ? `${SITE_CONFIG.url}/iptv-${citySlug}` : `${SITE_CONFIG.url}/de/iptv-${citySlug}`,
       siteName: SITE_CONFIG.name,
       locale: isFr ? 'fr_CH' : 'de_CH',
       type: 'website',
@@ -54,10 +55,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: meta.description,
     },
     alternates: {
-      canonical: `${SITE_CONFIG.url}/${locale}/iptv-${citySlug}`,
+      canonical: locale === 'fr' ? `${SITE_CONFIG.url}/iptv-${citySlug}` : `${SITE_CONFIG.url}/de/iptv-${citySlug}`,
       languages: {
-        'fr-CH': `${SITE_CONFIG.url}/fr/iptv-${citySlug}`,
+        'fr-CH': `${SITE_CONFIG.url}/iptv-${citySlug}`,
         'de-CH': `${SITE_CONFIG.url}/de/iptv-${citySlug}`,
+        'x-default': `${SITE_CONFIG.url}/iptv-${citySlug}`,
       },
     },
   };
@@ -94,8 +96,8 @@ export default async function CityPage({ params }: Props) {
     <>
       <BreadcrumbSchema
         items={[
-          { name: isFr ? 'Accueil' : 'Startseite', url: `${SITE_CONFIG.url}/${locale}` },
-          { name: `IPTV ${cityName}`, url: `${SITE_CONFIG.url}/${locale}/iptv-${citySlug}` },
+          { name: isFr ? 'Accueil' : 'Startseite', url: localeUrl(locale) },
+          { name: `IPTV ${cityName}`, url: localeUrl(locale, `/iptv-${citySlug}`) },
         ]}
       />
       <CitySchema locale={locale} citySlug={citySlug} />

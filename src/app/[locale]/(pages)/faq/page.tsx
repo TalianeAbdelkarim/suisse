@@ -2,6 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import FAQ from '@/components/sections/FAQ';
 import { SITE_CONFIG } from '@/lib/constants';
+import { localeUrl } from '@/lib/utils';
 import { BreadcrumbSchema, FAQSchema } from '@/components/seo/SchemaMarkup';
 import type { Metadata } from 'next';
 
@@ -17,10 +18,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t('title') + ' ' + t('titleHighlight'),
     description: t('subtitle'),
     alternates: {
-      canonical: `${SITE_CONFIG.url}/${locale}/faq`,
+      canonical: locale === 'fr' ? `${SITE_CONFIG.url}/faq` : `${SITE_CONFIG.url}/de/faq`,
       languages: {
-        'fr-CH': `${SITE_CONFIG.url}/fr/faq`,
+        'fr-CH': `${SITE_CONFIG.url}/faq`,
         'de-CH': `${SITE_CONFIG.url}/de/faq`,
+        'x-default': `${SITE_CONFIG.url}/faq`,
       },
     },
   };
@@ -54,8 +56,8 @@ export default async function FAQPage({ params }: Props) {
     <>
       <BreadcrumbSchema
         items={[
-          { name: isFr ? 'Accueil' : 'Startseite', url: `${SITE_CONFIG.url}/${locale}` },
-          { name: 'FAQ', url: `${SITE_CONFIG.url}/${locale}/faq` },
+          { name: isFr ? 'Accueil' : 'Startseite', url: localeUrl(locale) },
+          { name: 'FAQ', url: localeUrl(locale, '/faq') },
         ]}
       />
       <FAQSchema faqs={allFaqs} />

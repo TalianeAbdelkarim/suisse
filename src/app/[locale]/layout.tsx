@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: meta.title,
       description: meta.description,
-      url: `${SITE_CONFIG.url}/${locale}`,
+      url: locale === 'fr' ? SITE_CONFIG.url : `${SITE_CONFIG.url}/de`,
       siteName: SITE_CONFIG.name,
       locale: locale === 'fr' ? 'fr_CH' : 'de_CH',
       type: 'website',
@@ -61,11 +61,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [`${SITE_CONFIG.url}/images/og-featured.png`],
     },
     alternates: {
-      canonical: `${SITE_CONFIG.url}/${locale}`,
+      canonical: locale === 'fr' ? SITE_CONFIG.url : `${SITE_CONFIG.url}/de`,
       languages: {
-        'fr-CH': `${SITE_CONFIG.url}/fr`,
+        'fr-CH': SITE_CONFIG.url,
         'de-CH': `${SITE_CONFIG.url}/de`,
-        'x-default': `${SITE_CONFIG.url}/fr`,
+        'x-default': SITE_CONFIG.url,
       },
     },
     robots: {

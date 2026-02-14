@@ -6,7 +6,7 @@ type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return { title: locale === 'fr' ? 'Conditions d\'utilisation' : 'Nutzungsbedingungen', alternates: { canonical: `${SITE_CONFIG.url}/${locale}/terms` } };
+  return { title: locale === 'fr' ? 'Conditions d\'utilisation' : 'Nutzungsbedingungen', alternates: { canonical: locale === 'fr' ? `${SITE_CONFIG.url}/terms` : `${SITE_CONFIG.url}/de/terms`, languages: { 'fr-CH': `${SITE_CONFIG.url}/terms`, 'de-CH': `${SITE_CONFIG.url}/de/terms`, 'x-default': `${SITE_CONFIG.url}/terms` } } };
 }
 
 export default async function TermsPage({ params }: Props) {

@@ -1,4 +1,5 @@
 import { SITE_CONFIG, PLANS, STATS } from '@/lib/constants';
+import { localeUrl } from '@/lib/utils';
 
 interface JsonLdProps {
   locale: string;
@@ -40,7 +41,7 @@ export default function JsonLd({ locale }: JsonLdProps) {
     inLanguage: isFr ? 'fr-CH' : 'de-CH',
     potentialAction: {
       '@type': 'SearchAction',
-      target: `${SITE_CONFIG.url}/${locale}/search?q={search_term_string}`,
+      target: `${localeUrl(locale, '/search')}?q={search_term_string}`,
       'query-input': 'required name=search_term_string',
     },
   };
@@ -68,7 +69,7 @@ export default function JsonLd({ locale }: JsonLdProps) {
         '@type': 'Organization',
         name: SITE_CONFIG.name,
       },
-      url: `${SITE_CONFIG.url}/${locale}/plans/${plan.slug}`,
+      url: localeUrl(locale, `/plans/${plan.slug}`),
     },
     aggregateRating: {
       '@type': 'AggregateRating',

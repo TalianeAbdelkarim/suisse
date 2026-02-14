@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { SITE_CONFIG } from '@/lib/constants';
+import { localeUrl } from '@/lib/utils';
 import { BreadcrumbSchema, MultiScreenSchema, FAQSchema } from '@/components/seo/SchemaMarkup';
 import MultiEcransClient from './MultiEcransClient';
 
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      url: `${SITE_CONFIG.url}/${locale}/multi-ecrans`,
+      url: locale === 'fr' ? `${SITE_CONFIG.url}/multi-ecrans` : `${SITE_CONFIG.url}/de/multi-ecrans`,
       siteName: SITE_CONFIG.name,
       locale: isFr ? 'fr_CH' : 'de_CH',
       type: 'website',
@@ -40,10 +41,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
     },
     alternates: {
-      canonical: `${SITE_CONFIG.url}/${locale}/multi-ecrans`,
+      canonical: locale === 'fr' ? `${SITE_CONFIG.url}/multi-ecrans` : `${SITE_CONFIG.url}/de/multi-ecrans`,
       languages: {
-        'fr-CH': `${SITE_CONFIG.url}/fr/multi-ecrans`,
+        'fr-CH': `${SITE_CONFIG.url}/multi-ecrans`,
         'de-CH': `${SITE_CONFIG.url}/de/multi-ecrans`,
+        'x-default': `${SITE_CONFIG.url}/multi-ecrans`,
       },
     },
   };
@@ -73,8 +75,8 @@ export default async function MultiEcransPage({ params }: Props) {
     <>
       <BreadcrumbSchema
         items={[
-          { name: isFr ? 'Accueil' : 'Startseite', url: `${SITE_CONFIG.url}/${locale}` },
-          { name: isFr ? 'Multi-Écrans' : 'Multi-Bildschirm', url: `${SITE_CONFIG.url}/${locale}/multi-ecrans` },
+          { name: isFr ? 'Accueil' : 'Startseite', url: localeUrl(locale) },
+          { name: isFr ? 'Multi-Écrans' : 'Multi-Bildschirm', url: localeUrl(locale, '/multi-ecrans') },
         ]}
       />
       <MultiScreenSchema locale={locale} />

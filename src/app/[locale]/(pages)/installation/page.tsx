@@ -8,7 +8,7 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'installation' });
-  return { title: t('title'), description: t('subtitle'), alternates: { canonical: `${SITE_CONFIG.url}/${locale}/installation`, languages: { 'fr-CH': `${SITE_CONFIG.url}/fr/installation`, 'de-CH': `${SITE_CONFIG.url}/de/installation` } } };
+  return { title: t('title'), description: t('subtitle'), alternates: { canonical: locale === 'fr' ? `${SITE_CONFIG.url}/installation` : `${SITE_CONFIG.url}/de/installation`, languages: { 'fr-CH': `${SITE_CONFIG.url}/installation`, 'de-CH': `${SITE_CONFIG.url}/de/installation`, 'x-default': `${SITE_CONFIG.url}/installation` } } };
 }
 
 export default async function InstallationPage({ params }: Props) {

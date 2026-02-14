@@ -8,7 +8,7 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'about' });
-  return { title: t('title'), description: t('subtitle'), alternates: { canonical: `${SITE_CONFIG.url}/${locale}/about`, languages: { 'fr-CH': `${SITE_CONFIG.url}/fr/about`, 'de-CH': `${SITE_CONFIG.url}/de/about` } } };
+  return { title: t('title'), description: t('subtitle'), alternates: { canonical: locale === 'fr' ? `${SITE_CONFIG.url}/about` : `${SITE_CONFIG.url}/de/about`, languages: { 'fr-CH': `${SITE_CONFIG.url}/about`, 'de-CH': `${SITE_CONFIG.url}/de/about`, 'x-default': `${SITE_CONFIG.url}/about` } } };
 }
 
 export default async function AboutPage({ params }: Props) {

@@ -19,3 +19,26 @@ export function getMonthlyPrice(price: number, duration: number): string {
 export function getDiscount(original: number, current: number): number {
   return Math.round(((original - current) / original) * 100);
 }
+
+// ─── Locale URL helpers (as-needed prefix) ───────────────────
+// French (default) → no prefix: https://iptvsuisse.co/path
+// German           → prefix:    https://iptvsuisse.co/de/path
+import { SITE_CONFIG } from './constants';
+
+export function localeUrl(locale: string, path: string = '') {
+  if (locale === 'fr') {
+    return `${SITE_CONFIG.url}${path}`;
+  }
+  return `${SITE_CONFIG.url}/${locale}${path}`;
+}
+
+export function localeAlternates(path: string = '') {
+  return {
+    canonical: undefined as string | undefined, // set by caller
+    languages: {
+      'fr-CH': `${SITE_CONFIG.url}${path}`,
+      'de-CH': `${SITE_CONFIG.url}/de${path}`,
+      'x-default': `${SITE_CONFIG.url}${path}`,
+    },
+  };
+}

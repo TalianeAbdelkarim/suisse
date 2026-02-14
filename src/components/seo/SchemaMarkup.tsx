@@ -1,5 +1,6 @@
 import { SITE_CONFIG, PLANS } from '@/lib/constants';
 import { CITIES_DATA } from '@/lib/cities';
+import { localeUrl } from '@/lib/utils';
 
 // ─── Breadcrumb Schema ─────────────────────────────────────
 interface BreadcrumbItem {
@@ -62,7 +63,7 @@ export function PlanProductSchema({
         '@type': 'Organization',
         name: SITE_CONFIG.name,
       },
-      url: `${SITE_CONFIG.url}/${locale}/plans/${slug}`,
+      url: localeUrl(locale, `/plans/${slug}`),
     },
     aggregateRating: {
       '@type': 'AggregateRating',
@@ -157,7 +158,7 @@ export function CitySchema({
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: `${SITE_CONFIG.name} ${city.name}`,
-    url: `${SITE_CONFIG.url}/${locale}/iptv-${citySlug}`,
+    url: localeUrl(locale, `/iptv-${citySlug}`),
     telephone: SITE_CONFIG.phone,
     email: SITE_CONFIG.email,
     description: isFr ? city.meta_fr.description : city.meta_de.description,
@@ -220,7 +221,7 @@ export function MultiScreenSchema({ locale }: { locale: string }) {
       priceCurrency: 'CHF',
       availability: 'https://schema.org/InStock',
       priceValidUntil,
-      url: `${SITE_CONFIG.url}/${locale}/plans/${plan.slug}`,
+      url: localeUrl(locale, `/plans/${plan.slug}`),
     },
     review: {
       '@type': 'Review',

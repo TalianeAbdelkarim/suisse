@@ -47,18 +47,18 @@ const nextConfig: NextConfig = {
   // ─── Redirects ───────────────────────────────────────────
   async redirects() {
     return [
-      // Old WordPress URL patterns → new routes
-      { source: '/abonnement-iptv-suisse', destination: '/fr/#pricing', permanent: true },
-      { source: '/iptv-plan/:slug', destination: '/fr/plans/:slug', permanent: true },
-      { source: '/guide-dinstallation-iptv', destination: '/fr/installation', permanent: true },
-      { source: '/a-propos', destination: '/fr/about', permanent: true },
-      { source: '/politique-de-confidentialite', destination: '/fr/privacy', permanent: true },
-      { source: '/conditions-dutilisation', destination: '/fr/terms', permanent: true },
-      { source: '/faq', destination: '/fr/faq', permanent: true },
-      { source: '/contact', destination: '/fr/contact', permanent: true },
-      { source: '/merci', destination: '/fr/merci', permanent: true },
+      // Old WordPress URL patterns → new routes (no /fr prefix needed, it's the default)
+      { source: '/abonnement-iptv-suisse', destination: '/#pricing', permanent: true },
+      { source: '/iptv-plan/:slug', destination: '/plans/:slug', permanent: true },
+      { source: '/guide-dinstallation-iptv', destination: '/installation', permanent: true },
+      { source: '/a-propos', destination: '/about', permanent: true },
+      { source: '/politique-de-confidentialite', destination: '/privacy', permanent: true },
+      { source: '/conditions-dutilisation', destination: '/terms', permanent: true },
+      // Redirect old /fr/ prefixed URLs to clean URLs
+      { source: '/fr', destination: '/', permanent: true },
+      { source: '/fr/:path+', destination: '/:path+', permanent: true },
       // Trailing slash normalization
-      { source: '/:locale(fr|de)/:path+/', destination: '/:locale/:path+', permanent: true },
+      { source: '/de/:path+/', destination: '/de/:path+', permanent: true },
     ];
   },
 };

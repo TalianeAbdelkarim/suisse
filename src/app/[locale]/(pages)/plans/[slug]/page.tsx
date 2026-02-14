@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { PLANS, SITE_CONFIG } from '@/lib/constants';
+import { localeUrl } from '@/lib/utils';
 import { BreadcrumbSchema, PlanProductSchema } from '@/components/seo/SchemaMarkup';
 import PlanPageClient from './PlanPageClient';
 
@@ -44,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title,
       description: metaDescription,
-      url: `${SITE_CONFIG.url}/${locale}/plans/${slug}`,
+      url: locale === 'fr' ? `${SITE_CONFIG.url}/plans/${slug}` : `${SITE_CONFIG.url}/de/plans/${slug}`,
       siteName: SITE_CONFIG.name,
       locale: isFr ? 'fr_CH' : 'de_CH',
       type: 'website',
@@ -64,10 +65,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [`${SITE_CONFIG.url}${plan.image}`],
     },
     alternates: {
-      canonical: `${SITE_CONFIG.url}/${locale}/plans/${slug}`,
+      canonical: locale === 'fr' ? `${SITE_CONFIG.url}/plans/${slug}` : `${SITE_CONFIG.url}/de/plans/${slug}`,
       languages: {
-        'fr-CH': `${SITE_CONFIG.url}/fr/plans/${slug}`,
+        'fr-CH': `${SITE_CONFIG.url}/plans/${slug}`,
         'de-CH': `${SITE_CONFIG.url}/de/plans/${slug}`,
+        'x-default': `${SITE_CONFIG.url}/plans/${slug}`,
       },
     },
   };
@@ -85,9 +87,9 @@ export default async function PlanPage({ params }: Props) {
     <>
       <BreadcrumbSchema
         items={[
-          { name: isFr ? 'Accueil' : 'Startseite', url: `${SITE_CONFIG.url}/${locale}` },
-          { name: isFr ? 'Nos Offres' : 'Angebote', url: `${SITE_CONFIG.url}/${locale}/#pricing` },
-          { name: planName, url: `${SITE_CONFIG.url}/${locale}/plans/${slug}` },
+          { name: isFr ? 'Accueil' : 'Startseite', url: localeUrl(locale) },
+          { name: isFr ? 'Nos Offres' : 'Angebote', url: localeUrl(locale, '/#pricing') },
+          { name: planName, url: localeUrl(locale, `/plans/${slug}`) },
         ]}
       />
       <PlanProductSchema locale={locale} slug={slug} />

@@ -6,7 +6,7 @@ type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return { title: locale === 'fr' ? 'Politique de confidentialité' : 'Datenschutz', alternates: { canonical: `${SITE_CONFIG.url}/${locale}/privacy` } };
+  return { title: locale === 'fr' ? 'Politique de confidentialité' : 'Datenschutz', alternates: { canonical: locale === 'fr' ? `${SITE_CONFIG.url}/privacy` : `${SITE_CONFIG.url}/de/privacy`, languages: { 'fr-CH': `${SITE_CONFIG.url}/privacy`, 'de-CH': `${SITE_CONFIG.url}/de/privacy`, 'x-default': `${SITE_CONFIG.url}/privacy` } } };
 }
 
 export default async function PrivacyPage({ params }: Props) {
