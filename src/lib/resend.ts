@@ -118,7 +118,7 @@ export async function sendPaymentLinkEmail(data: LeadEmailData) {
 
   try {
     const result = await getResend().emails.send({
-      from: `${SITE_CONFIG.name} <noreply@${SITE_CONFIG.domain}>`,
+      from: `${SITE_CONFIG.name} <contact@${SITE_CONFIG.domain}>`,
       to: data.email,
       subject,
       html,
@@ -153,7 +153,7 @@ export async function sendAdminNotification(data: LeadEmailData) {
 
   try {
     await getResend().emails.send({
-      from: `IPTV Suisse Leads <noreply@${SITE_CONFIG.domain}>`,
+      from: `IPTV Suisse Leads <contact@${SITE_CONFIG.domain}>`,
       to: SITE_CONFIG.email,
       subject: `🔔 Nouveau Lead: ${data.customerName} – ${data.planName}`,
       html,
