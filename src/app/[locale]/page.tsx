@@ -5,6 +5,7 @@ import WhyUs from '@/components/sections/WhyUs';
 import Pricing from '@/components/sections/Pricing';
 import MultiScreenBanner from '@/components/sections/MultiScreenBanner';
 import Testimonials from '@/components/sections/Testimonials';
+import DeviceCompatibility from '@/components/sections/DeviceCompatibility';
 import FAQ from '@/components/sections/FAQ';
 import CityLinks from '@/components/sections/CityLinks';
 import CTA from '@/components/sections/CTA';
@@ -27,6 +28,7 @@ export default async function HomePage({ params }: Props) {
       <Pricing />
       <MultiScreenBanner />
       <Testimonials />
+      <DeviceCompatibility />
       <FAQ />
       <CityLinks />
       <CTA />

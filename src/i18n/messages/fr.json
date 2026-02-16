@@ -135,6 +135,16 @@
       }
     ]
   },
+  "devices": {
+    "title": "Compatible avec tous vos appareils",
+    "subtitle": "Accédez à toutes les chaînes suisses et internationales sur tous vos appareils préférés.",
+    "smarttv": "Smart TV",
+    "android": "Android",
+    "ios": "iOS / tvOS",
+    "windows": "Windows",
+    "firetv": "Fire TV",
+    "iptv_box": "Boîtier IPTV"
+  },
   "cta": {
     "title": "Prêt à commencer ?",
     "subtitle": "Rejoignez plus de 15'000 clients satisfaits et profitez du meilleur IPTV Suisse au meilleur prix.",
