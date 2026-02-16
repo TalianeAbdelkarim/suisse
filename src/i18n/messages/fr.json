@@ -145,6 +145,29 @@
     "firetv": "Fire TV",
     "iptv_box": "Boîtier IPTV"
   },
+  "howItWorks": {
+    "badge": "Installation simple et rapide",
+    "title": "Comment",
+    "titleHighlight": "ça fonctionne",
+    "subtitle": "Accédez à notre service premium en seulement quelques étapes simples",
+    "step1": {
+      "title": "Choisissez un forfait",
+      "description": "Sélectionnez le forfait qui correspond à vos besoins et procédez au paiement sécurisé."
+    },
+    "step2": {
+      "title": "Recevez vos accès",
+      "description": "Après validation de votre paiement, vous recevrez immédiatement vos identifiants et instructions par email."
+    },
+    "step3": {
+      "title": "Installez l'application",
+      "description": "Suivez notre guide simple pour installer l'application IPTV sur vos appareils préférés."
+    },
+    "step4": {
+      "title": "Profitez du contenu",
+      "description": "Accédez instantanément à plus de 15'000 chaînes HD et contenus VOD sur tous vos appareils."
+    },
+    "cta": "Commencer maintenant"
+  },
   "cta": {
     "title": "Prêt à commencer ?",
     "subtitle": "Rejoignez plus de 15'000 clients satisfaits et profitez du meilleur IPTV Suisse au meilleur prix.",

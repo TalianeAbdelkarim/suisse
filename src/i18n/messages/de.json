@@ -145,6 +145,29 @@
     "firetv": "Fire TV",
     "iptv_box": "IPTV-Box"
   },
+  "howItWorks": {
+    "badge": "Einfache und schnelle Installation",
+    "title": "So",
+    "titleHighlight": "funktioniert's",
+    "subtitle": "Greifen Sie in nur wenigen einfachen Schritten auf unseren Premium-Service zu",
+    "step1": {
+      "title": "Wählen Sie ein Abo",
+      "description": "Wählen Sie das Abo, das Ihren Bedürfnissen entspricht, und bezahlen Sie sicher."
+    },
+    "step2": {
+      "title": "Zugangsdaten erhalten",
+      "description": "Nach Bestätigung Ihrer Zahlung erhalten Sie sofort Ihre Zugangsdaten und Anweisungen per E-Mail."
+    },
+    "step3": {
+      "title": "App installieren",
+      "description": "Folgen Sie unserer einfachen Anleitung, um die IPTV-App auf Ihren Lieblingsgeräten zu installieren."
+    },
+    "step4": {
+      "title": "Inhalte geniessen",
+      "description": "Greifen Sie sofort auf über 15'000 HD-Kanäle und VOD-Inhalte auf all Ihren Geräten zu."
+    },
+    "cta": "Jetzt starten"
+  },
   "cta": {
     "title": "Bereit loszulegen?",
     "subtitle": "Schliessen Sie sich über 15'000 zufriedenen Kunden an und geniessen Sie das beste IPTV Schweiz zum besten Preis.",
