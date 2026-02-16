@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { createServerClient } from '@/lib/supabase';
-import { sendPaymentLinkEmail, sendAdminNotification } from '@/lib/resend';
+import { sendPaymentLinkEmail } from '@/lib/resend';
+import { PLANS } from '@/lib/constants';
+import { formatPrice } from '@/lib/utils';
 
 async function requireAuth() {
   const cookieStore = await cookies();
@@ -47,14 +49,19 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'No payment link set for this lead\'s plan' }, { status: 400 });
   }
 
+  // Look up plan info for price/duration
+  const plan = PLANS.find(p => p.name_fr === lead.plan_name || p.name_de === lead.plan_name);
+  const planPrice = plan ? formatPrice(plan.price) : '—';
+  const planDuration = plan?.duration || 0;
+
   // Send payment email
   const result = await sendPaymentLinkEmail({
     customerName: lead.customer_name,
     email: lead.email,
     phone: lead.phone,
     planName: lead.plan_name,
-    planPrice: lead.payment_link ? '—' : '—',
-    planDuration: 0,
+    planPrice,
+    planDuration,
     paymentLink: lead.payment_link,
     locale: lead.locale || 'fr',
     leadId: lead.id,

@@ -29,17 +29,28 @@ export async function POST(request: NextRequest) {
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
     const userAgent = request.headers.get('user-agent') || 'unknown';
 
-    // Find the plan to get payment link and price
+    // Find the plan to get price and duration
     const plan = PLANS.find((p) => p.id === plan_id);
-    const paymentLink = plan?.payment_link || '#';
     const planPrice = plan ? formatPrice(plan.price) : '0';
     const planDuration = plan?.duration || 0;
+    let paymentLink = plan?.payment_link || '';
 
     let leadId = crypto.randomUUID();
 
     // ─── Save to Supabase ────────────────────────────────
     try {
       const supabase = createServerClient();
+
+      // Check DB settings for a payment link override
+      const { data: settingRow } = await supabase
+        .from('settings')
+        .select('value')
+        .eq('key', `payment_link_${plan_id}`)
+        .single();
+
+      if (settingRow?.value) {
+        paymentLink = settingRow.value;
+      }
       const { data, error } = await supabase
         .from('leads')
         .insert({

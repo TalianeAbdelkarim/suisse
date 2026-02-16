@@ -7,7 +7,7 @@ import { SITE_CONFIG } from './constants';
 
 // Lazy init — avoids crash at build time when RESEND_API_KEY is not yet set
 let _resend: Resend | null = null;
-function getResend(): Resend {
+export function getResend(): Resend {
   if (!_resend) {
     const key = process.env.RESEND_API_KEY;
     if (!key) throw new Error('RESEND_API_KEY is not configured');

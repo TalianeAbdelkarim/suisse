@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   Users,
   CreditCard,
+  MessageSquare,
   Settings,
   LogOut,
   Menu,
@@ -17,6 +18,7 @@ import {
 const NAV_ITEMS = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/leads', label: 'Leads', icon: Users },
+  { href: '/admin/messages', label: 'Messages', icon: MessageSquare },
   { href: '/admin/plans', label: 'Plans', icon: CreditCard },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ];
