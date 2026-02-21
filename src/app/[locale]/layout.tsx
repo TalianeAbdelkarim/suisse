@@ -8,6 +8,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import WhatsAppButton from '@/components/ui/WhatsAppButton';
 import LiveChat from '@/components/ui/LiveChat';
+import VisitorTracker from '@/components/ui/VisitorTracker';
 import GoogleAnalytics from '@/components/ui/GoogleAnalytics';
 
 type Props = {
@@ -102,6 +103,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <Footer />
       <WhatsAppButton />
       <LiveChat />
+      <VisitorTracker />
     </NextIntlClientProvider>
   );
 }
