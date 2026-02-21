@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { createServerClient } from '@/lib/supabase';
 
+export const dynamic = 'force-dynamic';
+
 async function requireAuth() {
   const cookieStore = await cookies();
   const token = cookieStore.get('admin_session')?.value;
