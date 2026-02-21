@@ -66,6 +66,39 @@ export async function GET() {
   // Conversion rate
   const conversionRate = total > 0 ? ((converted / total) * 100).toFixed(1) : '0';
 
+  // Notification badges
+  const dayAgo = new Date(Date.now() - 86_400_000).toISOString();
+  const { count: newLeads24h } = await supabase
+    .from('leads')
+    .select('*', { count: 'exact', head: true })
+    .gte('created_at', dayAgo);
+
+  const { data: unreadConvos } = await supabase
+    .from('conversations')
+    .select('unread_count')
+    .gt('unread_count', 0);
+  const unreadMessages = unreadConvos?.reduce((sum, c) => sum + (c.unread_count || 0), 0) || 0;
+
+  let unreadChat = 0;
+  try {
+    const { data: unreadChats } = await supabase
+      .from('chat_sessions')
+      .select('unread_count')
+      .eq('status', 'open')
+      .gt('unread_count', 0);
+    unreadChat = unreadChats?.reduce((sum, c) => sum + (c.unread_count || 0), 0) || 0;
+  } catch { /* table may not exist yet */ }
+
+  let onlineVisitors = 0;
+  try {
+    const cutoff30s = new Date(Date.now() - 30_000).toISOString();
+    const { count } = await supabase
+      .from('live_visitors')
+      .select('*', { count: 'exact', head: true })
+      .gte('last_seen_at', cutoff30s);
+    onlineVisitors = count || 0;
+  } catch { /* table may not exist yet */ }
+
   return NextResponse.json({
     leads: {
       total,
@@ -85,5 +118,11 @@ export async function GET() {
       total: totalClicks || 0,
     },
     conversionRate,
+    badges: {
+      leads: newLeads24h || 0,
+      messages: unreadMessages,
+      chat: unreadChat,
+      visitors: onlineVisitors,
+    },
   });
 }

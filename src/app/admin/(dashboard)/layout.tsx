@@ -40,15 +40,15 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
   const pathname = usePathname();
 
   const fetchBadges = useCallback(() => {
-    fetch('/api/admin/notifications')
+    fetch('/api/admin/stats')
       .then(r => r.json())
       .then(data => {
-        if (!data.error) {
+        if (data.badges) {
           setBadges({
-            leads: data.leads || 0,
-            messages: data.messages || 0,
-            chat: data.chat || 0,
-            visitors: data.visitors || 0,
+            leads: data.badges.leads || 0,
+            messages: data.badges.messages || 0,
+            chat: data.badges.chat || 0,
+            visitors: data.badges.visitors || 0,
           });
         }
       })
