@@ -26,6 +26,10 @@ const TEXTS = {
     greeting: 'Bonjour ! Comment pouvons-nous vous aider ?',
     offline: 'Nous sommes actuellement hors ligne. Laissez-nous un message !',
     send: 'Envoyer',
+    emailLabel: 'Votre adresse e-mail',
+    emailPlaceholder: 'email@exemple.com',
+    emailStart: 'Démarrer le chat',
+    emailRequired: 'Entrez votre e-mail pour commencer',
   },
   de: {
     title: 'Live-Chat',
@@ -34,6 +38,10 @@ const TEXTS = {
     greeting: 'Hallo! Wie können wir Ihnen helfen?',
     offline: 'Wir sind derzeit offline. Hinterlassen Sie uns eine Nachricht!',
     send: 'Senden',
+    emailLabel: 'Ihre E-Mail-Adresse',
+    emailPlaceholder: 'email@beispiel.com',
+    emailStart: 'Chat starten',
+    emailRequired: 'Geben Sie Ihre E-Mail ein, um zu beginnen',
   },
 };
 
@@ -55,11 +63,14 @@ export default function LiveChat() {
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
+  const [email, setEmail] = useState('');
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [session, setSession] = useState<Session | null>(null);
   const [sending, setSending] = useState(false);
   const [hasNewMessage, setHasNewMessage] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
   const lastMessageCount = useRef(0);
 
   const scrollToBottom = useCallback(() => {
@@ -71,12 +82,19 @@ export default function LiveChat() {
     const visitorId = getVisitorId();
     if (!visitorId) return;
 
+    const savedEmail = localStorage.getItem('chat_visitor_email');
+    if (savedEmail) {
+      setEmail(savedEmail);
+      setEmailSubmitted(true);
+    }
+
     fetch(`/api/chat?visitor_id=${visitorId}`)
       .then(r => r.json())
       .then(data => {
         if (data.session) {
           setSession(data.session);
           setMessages(data.messages || []);
+          setEmailSubmitted(true);
           lastMessageCount.current = data.messages?.length || 0;
         }
       })
@@ -114,38 +132,50 @@ export default function LiveChat() {
     if (isOpen) scrollToBottom();
   }, [messages, isOpen, scrollToBottom]);
 
-  // Focus input when opened
+  // Focus appropriate input when opened
   useEffect(() => {
     if (isOpen && !isMinimized) {
-      setTimeout(() => inputRef.current?.focus(), 200);
+      if (!emailSubmitted) {
+        setTimeout(() => emailInputRef.current?.focus(), 200);
+      } else {
+        setTimeout(() => inputRef.current?.focus(), 200);
+      }
     }
-  }, [isOpen, isMinimized]);
+  }, [isOpen, isMinimized, emailSubmitted]);
 
-  async function openChat() {
+  function openChat() {
     setIsOpen(true);
     setIsMinimized(false);
     setHasNewMessage(false);
+  }
 
-    if (!session) {
-      const visitorId = getVisitorId();
-      try {
-        const res = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'create_session',
-            visitor_id: visitorId,
-            page_url: window.location.href,
-            locale,
-          }),
-        });
-        const data = await res.json();
-        if (data.session) {
-          setSession(data.session);
-        }
-      } catch {
-        // silently fail
+  async function startSession(e?: React.FormEvent) {
+    e?.preventDefault();
+    const trimmed = email.trim();
+    if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) return;
+
+    localStorage.setItem('chat_visitor_email', trimmed);
+    setEmailSubmitted(true);
+
+    const visitorId = getVisitorId();
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'create_session',
+          visitor_id: visitorId,
+          visitor_email: trimmed,
+          page_url: window.location.href,
+          locale,
+        }),
+      });
+      const data = await res.json();
+      if (data.session) {
+        setSession(data.session);
       }
+    } catch {
+      // silently fail
     }
   }
 
@@ -235,74 +265,112 @@ export default function LiveChat() {
               </button>
             </div>
 
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50">
-              {/* Greeting */}
-              <div className="flex gap-2.5 items-end">
-                <div className="w-7 h-7 rounded-full bg-[#D52B1E] flex items-center justify-center shrink-0">
-                  <span className="text-white text-[10px] font-bold">IS</span>
+            {!emailSubmitted ? (
+              /* Email Collection Form */
+              <div className="flex-1 flex flex-col items-center justify-center p-6 bg-gray-50">
+                <div className="flex gap-2.5 items-end mb-6 self-start">
+                  <div className="w-7 h-7 rounded-full bg-[#D52B1E] flex items-center justify-center shrink-0">
+                    <span className="text-white text-[10px] font-bold">IS</span>
+                  </div>
+                  <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-md px-3.5 py-2.5 shadow-sm">
+                    <p className="text-sm text-gray-700 leading-relaxed">{t.greeting}</p>
+                  </div>
                 </div>
-                <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-md px-3.5 py-2.5 max-w-[80%] shadow-sm">
-                  <p className="text-sm text-gray-700 leading-relaxed">{t.greeting}</p>
-                </div>
-              </div>
 
-              {messages.map(msg => (
-                <div
-                  key={msg.id}
-                  className={`flex gap-2.5 items-end ${
-                    msg.sender === 'visitor' ? 'flex-row-reverse' : ''
-                  }`}
-                >
-                  {msg.sender === 'admin' && (
+                <form onSubmit={startSession} className="w-full max-w-[280px] space-y-3">
+                  <label className="block text-sm font-semibold text-gray-700">
+                    {t.emailLabel}
+                  </label>
+                  <input
+                    ref={emailInputRef}
+                    type="email"
+                    required
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    placeholder={t.emailPlaceholder}
+                    className="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#D52B1E]/40 focus:ring-1 focus:ring-[#D52B1E]/20 transition"
+                  />
+                  <button
+                    type="submit"
+                    className="w-full py-2.5 bg-[#D52B1E] hover:bg-[#B82318] text-white font-semibold text-sm rounded-xl transition"
+                  >
+                    {t.emailStart}
+                  </button>
+                  <p className="text-[11px] text-gray-400 text-center">{t.emailRequired}</p>
+                </form>
+              </div>
+            ) : (
+              <>
+                {/* Messages */}
+                <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50">
+                  {/* Greeting */}
+                  <div className="flex gap-2.5 items-end">
                     <div className="w-7 h-7 rounded-full bg-[#D52B1E] flex items-center justify-center shrink-0">
                       <span className="text-white text-[10px] font-bold">IS</span>
                     </div>
-                  )}
-                  <div
-                    className={`rounded-2xl px-3.5 py-2.5 max-w-[80%] shadow-sm ${
-                      msg.sender === 'visitor'
-                        ? 'bg-[#D52B1E] text-white rounded-br-md'
-                        : 'bg-white border border-gray-200 rounded-bl-md'
-                    }`}
-                  >
-                    <p className={`text-sm leading-relaxed ${
-                      msg.sender === 'visitor' ? 'text-white' : 'text-gray-700'
-                    }`}>
-                      {msg.body}
-                    </p>
-                    <p className={`text-[10px] mt-1 ${
-                      msg.sender === 'visitor' ? 'text-white/60' : 'text-gray-400'
-                    }`}>
-                      {formatTime(msg.created_at)}
-                    </p>
+                    <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-md px-3.5 py-2.5 max-w-[80%] shadow-sm">
+                      <p className="text-sm text-gray-700 leading-relaxed">{t.greeting}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-              <div ref={messagesEndRef} />
-            </div>
 
-            {/* Input */}
-            <form
-              onSubmit={sendMessage}
-              className="p-3 border-t border-gray-200 bg-white flex gap-2 shrink-0"
-            >
-              <input
-                ref={inputRef}
-                type="text"
-                value={input}
-                onChange={e => setInput(e.target.value)}
-                placeholder={t.placeholder}
-                className="flex-1 px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#D52B1E]/40 focus:ring-1 focus:ring-[#D52B1E]/20 transition"
-              />
-              <button
-                type="submit"
-                disabled={!input.trim() || sending}
-                className="w-10 h-10 bg-[#D52B1E] hover:bg-[#B82318] disabled:opacity-40 disabled:hover:bg-[#D52B1E] rounded-xl flex items-center justify-center transition shrink-0"
-              >
-                <Send className="w-4 h-4 text-white" />
-              </button>
-            </form>
+                  {messages.map(msg => (
+                    <div
+                      key={msg.id}
+                      className={`flex gap-2.5 items-end ${
+                        msg.sender === 'visitor' ? 'flex-row-reverse' : ''
+                      }`}
+                    >
+                      {msg.sender === 'admin' && (
+                        <div className="w-7 h-7 rounded-full bg-[#D52B1E] flex items-center justify-center shrink-0">
+                          <span className="text-white text-[10px] font-bold">IS</span>
+                        </div>
+                      )}
+                      <div
+                        className={`rounded-2xl px-3.5 py-2.5 max-w-[80%] shadow-sm ${
+                          msg.sender === 'visitor'
+                            ? 'bg-[#D52B1E] text-white rounded-br-md'
+                            : 'bg-white border border-gray-200 rounded-bl-md'
+                        }`}
+                      >
+                        <p className={`text-sm leading-relaxed ${
+                          msg.sender === 'visitor' ? 'text-white' : 'text-gray-700'
+                        }`}>
+                          {msg.body}
+                        </p>
+                        <p className={`text-[10px] mt-1 ${
+                          msg.sender === 'visitor' ? 'text-white/60' : 'text-gray-400'
+                        }`}>
+                          {formatTime(msg.created_at)}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                  <div ref={messagesEndRef} />
+                </div>
+
+                {/* Input */}
+                <form
+                  onSubmit={sendMessage}
+                  className="p-3 border-t border-gray-200 bg-white flex gap-2 shrink-0"
+                >
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={input}
+                    onChange={e => setInput(e.target.value)}
+                    placeholder={t.placeholder}
+                    className="flex-1 px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#D52B1E]/40 focus:ring-1 focus:ring-[#D52B1E]/20 transition"
+                  />
+                  <button
+                    type="submit"
+                    disabled={!input.trim() || sending}
+                    className="w-10 h-10 bg-[#D52B1E] hover:bg-[#B82318] disabled:opacity-40 disabled:hover:bg-[#D52B1E] rounded-xl flex items-center justify-center transition shrink-0"
+                  >
+                    <Send className="w-4 h-4 text-white" />
+                  </button>
+                </form>
+              </>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

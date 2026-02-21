@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     const { action } = body;
 
     if (action === 'create_session') {
-      const { visitor_id, page_url, locale } = body;
+      const { visitor_id, visitor_email, page_url, locale } = body;
       if (!visitor_id) {
         return NextResponse.json({ error: 'visitor_id required' }, { status: 400 });
       }
@@ -68,6 +68,13 @@ export async function POST(request: NextRequest) {
         .single();
 
       if (existing) {
+        if (visitor_email && !existing.visitor_email) {
+          await supabase
+            .from('chat_sessions')
+            .update({ visitor_email })
+            .eq('id', existing.id);
+          existing.visitor_email = visitor_email;
+        }
         return NextResponse.json({ session: existing });
       }
 
@@ -75,6 +82,7 @@ export async function POST(request: NextRequest) {
         .from('chat_sessions')
         .insert({
           visitor_id,
+          visitor_email: visitor_email || null,
           page_url: page_url || null,
           locale: locale || 'fr',
         })

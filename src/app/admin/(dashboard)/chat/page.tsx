@@ -236,7 +236,7 @@ export default function AdminChatPage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
                         <span className="text-sm font-semibold text-gray-900 truncate">
-                          {s.visitor_name || `Visitor ${s.visitor_id.slice(0, 6)}`}
+                          {s.visitor_email || s.visitor_name || `Visitor ${s.visitor_id.slice(0, 6)}`}
                         </span>
                         <span className="text-[10px] text-gray-400 shrink-0 ml-2">
                           {timeAgo(s.updated_at)}
@@ -289,10 +289,16 @@ export default function AdminChatPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="text-sm font-bold text-gray-900">
-                    {selectedSession.visitor_name ||
+                    {selectedSession.visitor_email ||
+                      selectedSession.visitor_name ||
                       `Visitor ${selectedSession.visitor_id.slice(0, 8)}`}
                   </h3>
                   <div className="flex items-center gap-3 text-[11px] text-gray-400">
+                    {selectedSession.visitor_email && (
+                      <span className="truncate max-w-[200px]">
+                        {selectedSession.visitor_email}
+                      </span>
+                    )}
                     {selectedSession.page_url && (
                       <span className="flex items-center gap-1 truncate max-w-[200px]">
                         <Globe className="w-3 h-3" />
