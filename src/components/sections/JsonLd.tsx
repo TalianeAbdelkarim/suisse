@@ -39,11 +39,6 @@ export default function JsonLd({ locale }: JsonLdProps) {
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.url,
     inLanguage: isFr ? 'fr-CH' : 'de-CH',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${localeUrl(locale, '/search')}?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
   };
 
   // Product schemas for each plan
@@ -106,6 +101,13 @@ export default function JsonLd({ locale }: JsonLdProps) {
           { q: 'Combien de temps prend l\'activation ?', a: 'L\'activation se fait en moins de 2 heures après confirmation du paiement.' },
           { q: 'Est-ce que le replay est inclus ?', a: 'Oui, la fonction replay est incluse dans tous nos abonnements jusqu\'à 7 jours en arrière.' },
           { q: 'Comment contacter le support ?', a: 'Notre équipe est disponible 24/7 par WhatsApp, email et téléphone avec réponse garantie en moins de 2 heures.' },
+          { q: 'Puis-je utiliser le service sur plusieurs appareils ?', a: 'Les abonnements standard permettent l\'utilisation sur 1 appareil à la fois. Pour un usage sur plusieurs écrans simultanés, consultez nos offres multi-écrans.' },
+          { q: 'L\'IPTV est-il légal en Suisse ?', a: 'En Suisse, la réception de contenus IPTV est autorisée pour un usage privé. Notre service respecte les réglementations en vigueur et propose un accès à des chaînes légitimes.' },
+          { q: 'Ai-je besoin d\'un VPN pour IPTV ?', a: 'Non, notre service fonctionne parfaitement sans VPN en Suisse. Un VPN est optionnel pour plus de confidentialité.' },
+          { q: 'Quelles chaînes suisses sont disponibles ?', a: 'Accédez à toutes les principales chaînes suisses francophones et germanophones, ainsi que des chaînes sportives, de divertissement et internationales de plus de 50 pays — soit 15\'000+ chaînes au total.' },
+          { q: 'Puis-je regarder le football en direct ?', a: 'Oui ! Accédez aux principales chaînes sportives pour regarder le football, le hockey, le tennis et bien d\'autres sports en direct. Les plus grandes compétitions européennes et suisses sont couvertes.' },
+          { q: 'Quelle vitesse internet est nécessaire ?', a: 'Une connexion de 10 Mbps suffit pour le streaming HD. Pour la 4K, nous recommandons 25 Mbps. Compatible avec Swisscom, Sunrise, Salt et tous les FAI suisses.' },
+          { q: 'Y a-t-il un essai gratuit ?', a: 'Contactez notre support par WhatsApp pour demander un test gratuit de 24h et découvrir la qualité de notre service avant de vous engager.' },
         ]
       : [
           { q: 'Was ist IPTV Schweiz?', a: 'IPTV Schweiz ist ein Internet-TV-Service mit über 15\'000 Live-Kanälen, 40\'000+ Filmen und 17\'000+ Serien in HD und 4K.' },
@@ -113,6 +115,13 @@ export default function JsonLd({ locale }: JsonLdProps) {
           { q: 'Wie lange dauert die Aktivierung?', a: 'Die Aktivierung erfolgt in weniger als 2 Stunden nach Zahlungsbestätigung.' },
           { q: 'Ist Replay enthalten?', a: 'Ja, die Replay-Funktion ist in allen Abonnements bis zu 7 Tage zurück enthalten.' },
           { q: 'Wie erreiche ich den Support?', a: 'Unser Team ist 24/7 per WhatsApp, E-Mail und Telefon erreichbar mit garantierter Antwort in 2 Stunden.' },
+          { q: 'Kann ich den Service auf mehreren Geräten nutzen?', a: 'Standard-Abonnements ermöglichen die Nutzung auf 1 Gerät gleichzeitig. Für die gleichzeitige Nutzung auf mehreren Bildschirmen, schauen Sie sich unsere Multi-Screen-Angebote an.' },
+          { q: 'Ist IPTV in der Schweiz legal?', a: 'In der Schweiz ist der Empfang von IPTV-Inhalten für den privaten Gebrauch erlaubt. Unser Service hält sich an geltende Vorschriften und bietet Zugang zu legitimen Kanälen.' },
+          { q: 'Brauche ich ein VPN für IPTV?', a: 'Nein, unser Service funktioniert in der Schweiz perfekt ohne VPN. Ein VPN ist optional für mehr Privatsphäre.' },
+          { q: 'Welche Schweizer Kanäle sind verfügbar?', a: 'Zugang zu allen wichtigen Schweizer deutsch- und französischsprachigen Kanälen sowie Sport-, Unterhaltungs- und internationale Kanäle aus über 50 Ländern — insgesamt 15\'000+ Kanäle.' },
+          { q: 'Kann ich Fussball live schauen?', a: 'Ja! Zugang zu den wichtigsten Sportkanälen für Fussball, Hockey, Tennis und viele weitere Sportarten live. Die grössten europäischen und Schweizer Wettbewerbe sind abgedeckt.' },
+          { q: 'Welche Internetgeschwindigkeit wird benötigt?', a: 'Eine Verbindung von 10 Mbit/s reicht für HD-Streaming. Für 4K empfehlen wir 25 Mbit/s. Kompatibel mit Swisscom, Sunrise, Salt und allen Schweizer ISPs.' },
+          { q: 'Gibt es einen kostenlosen Test?', a: 'Kontaktieren Sie unseren Support per WhatsApp für einen kostenlosen 24h-Test und entdecken Sie die Qualität unseres Services bevor Sie sich entscheiden.' },
         ]
     ).map(({ q, a }) => ({
       '@type': 'Question',

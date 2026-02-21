@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "IPTV Schweiz - Bester IPTV-Service in der Schweiz | 15'000+ HD-Kanäle",
-    "description": "Bestes IPTV Schweiz Abo mit +15'000 HD/4K-Kanälen, Filmen, Serien und Replay. Aktivierung in 2h, 24/7 Support in der Schweiz. Ab 35.99 CHF."
+    "title": "IPTV Schweiz - Bestes IPTV Abo Schweiz 2026 | 15'000+ HD/4K-Kanäle",
+    "description": "Bestes IPTV Schweiz Abo 2026 mit +15'000 HD/4K-Kanälen, Filmen, Serien und Replay. Aktivierung in 2h, 24/7 Support in der Schweiz. Ab 35.99 CHF."
   },
   "nav": {
     "home": "Startseite",
@@ -16,8 +16,9 @@
   "hero": {
     "badge": "Service #1 in der Schweiz",
     "swissBadge": "Premium-Service mit Sitz in der Schweiz",
+    "deviceBadge": "Multi-Geräte",
     "title": "IPTV Schweiz —",
-    "titleHighlight": "IPTV-Abonnement",
+    "titleHighlight": "IPTV-Abo 2026",
     "titleEnd": "Premium",
     "subtitle": "Der beste IPTV-Service in der Schweiz: +15'000 Kanäle in HD und 4K, 40'000+ Filme, 17'000+ Serien und Replay auf allen Geräten. IPTV Abo Schweiz mit 24/7 Support.",
     "ctaPrimary": "Angebote entdecken",
@@ -132,6 +133,30 @@
       {
         "question": "Kann ich den Service auf mehreren Geräten nutzen?",
         "answer": "Standard-Abonnements ermöglichen die Nutzung auf 1 Gerät gleichzeitig. Für die gleichzeitige Nutzung auf mehreren Bildschirmen, schauen Sie sich unsere Multi-Screen-Angebote an."
+      },
+      {
+        "question": "Ist IPTV in der Schweiz legal?",
+        "answer": "In der Schweiz ist der Empfang von IPTV-Inhalten für den privaten Gebrauch erlaubt. Unser Service hält sich an geltende Vorschriften und bietet Zugang zu legitimen Kanälen."
+      },
+      {
+        "question": "Brauche ich ein VPN für IPTV?",
+        "answer": "Nein, unser Service funktioniert in der Schweiz perfekt ohne VPN. Ein VPN ist optional für mehr Privatsphäre."
+      },
+      {
+        "question": "Welche Schweizer Kanäle sind verfügbar?",
+        "answer": "Zugang zu allen wichtigen Schweizer deutsch- und französischsprachigen Kanälen sowie Sport-, Unterhaltungs- und internationale Kanäle aus über 50 Ländern — insgesamt 15'000+ Kanäle."
+      },
+      {
+        "question": "Kann ich Fussball live schauen?",
+        "answer": "Ja! Zugang zu den wichtigsten Sportkanälen für Fussball, Hockey, Tennis und viele weitere Sportarten live. Die grössten europäischen und Schweizer Wettbewerbe sind abgedeckt."
+      },
+      {
+        "question": "Welche Internetgeschwindigkeit wird benötigt?",
+        "answer": "Eine Verbindung von 10 Mbit/s reicht für HD-Streaming. Für 4K empfehlen wir 25 Mbit/s. Kompatibel mit Swisscom, Sunrise, Salt und allen Schweizer ISPs."
+      },
+      {
+        "question": "Gibt es einen kostenlosen Test?",
+        "answer": "Kontaktieren Sie unseren Support per WhatsApp für einen kostenlosen 24h-Test und entdecken Sie die Qualität unseres Services bevor Sie sich entscheiden."
       }
     ]
   },

@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "IPTV Suisse - Meilleur Service IPTV en Suisse | 15'000+ Chaînes HD",
-    "description": "Meilleur abonnement IPTV Suisse avec +15'000 chaînes HD/4K, films, séries et replay. Activation en 2h, support 24/7 basé en Suisse. Dès 35.99 CHF."
+    "title": "IPTV Suisse - Meilleur Abonnement IPTV Suisse 2026 | 15'000+ Chaînes HD/4K",
+    "description": "Meilleur abonnement IPTV Suisse 2026 avec +15'000 chaînes HD/4K, films, séries et replay. Activation en 2h, support 24/7 basé en Suisse. Dès 35.99 CHF."
   },
   "nav": {
     "home": "Accueil",
@@ -16,8 +16,9 @@
   "hero": {
     "badge": "Service #1 en Suisse",
     "swissBadge": "Service Premium basé en Suisse",
+    "deviceBadge": "Multi-Appareils",
     "title": "IPTV Suisse —",
-    "titleHighlight": "Abonnement IPTV",
+    "titleHighlight": "Abonnement IPTV 2026",
     "titleEnd": "Premium",
     "subtitle": "Le meilleur service IPTV en Suisse : +15'000 chaînes HD et 4K, 40'000+ films, 17'000+ séries et le replay sur tous vos appareils. Abonnement IPTV Suisse pas cher avec support 24/7.",
     "ctaPrimary": "Découvrir nos offres",
@@ -132,6 +133,30 @@
       {
         "question": "Puis-je utiliser le service sur plusieurs appareils ?",
         "answer": "Les abonnements standard permettent l'utilisation sur 1 appareil à la fois. Pour un usage sur plusieurs écrans simultanés, consultez nos offres multi-écrans."
+      },
+      {
+        "question": "L'IPTV est-il légal en Suisse ?",
+        "answer": "En Suisse, la réception de contenus IPTV est autorisée pour un usage privé. Notre service respecte les réglementations en vigueur et propose un accès à des chaînes légitimes."
+      },
+      {
+        "question": "Ai-je besoin d'un VPN pour IPTV ?",
+        "answer": "Non, notre service fonctionne parfaitement sans VPN en Suisse. Un VPN est optionnel pour plus de confidentialité."
+      },
+      {
+        "question": "Quelles chaînes suisses sont disponibles ?",
+        "answer": "Accédez à toutes les principales chaînes suisses francophones et germanophones, ainsi que des chaînes sportives, de divertissement et internationales de plus de 50 pays — soit 15'000+ chaînes au total."
+      },
+      {
+        "question": "Puis-je regarder le football en direct ?",
+        "answer": "Oui ! Accédez aux principales chaînes sportives pour regarder le football, le hockey, le tennis et bien d'autres sports en direct. Les plus grandes compétitions européennes et suisses sont couvertes."
+      },
+      {
+        "question": "Quelle vitesse internet est nécessaire ?",
+        "answer": "Une connexion de 10 Mbps suffit pour le streaming HD. Pour la 4K, nous recommandons 25 Mbps. Compatible avec Swisscom, Sunrise, Salt et tous les FAI suisses."
+      },
+      {
+        "question": "Y a-t-il un essai gratuit ?",
+        "answer": "Contactez notre support par WhatsApp pour demander un test gratuit de 24h et découvrir la qualité de notre service avant de vous engager."
       }
     ]
   },

@@ -8,6 +8,7 @@ import {
   Users,
   CreditCard,
   MessageSquare,
+  MessageCircle,
   Settings,
   LogOut,
   Menu,
@@ -19,6 +20,7 @@ const NAV_ITEMS = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/leads', label: 'Leads', icon: Users },
   { href: '/admin/messages', label: 'Messages', icon: MessageSquare },
+  { href: '/admin/chat', label: 'Live Chat', icon: MessageCircle },
   { href: '/admin/plans', label: 'Plans', icon: CreditCard },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ];

@@ -82,5 +82,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
+  // TODO: Future pages to add to sitemap when created:
+  // - /chaines (FR) / /kanalliste (DE) — Channel list page
+  // - /essai-gratuit (FR) / /gratis-testen (DE) — Free trial page
+  // - /iptv-suisse-legal (FR) / /iptv-schweiz-legal (DE) — Legal/trust page
+  // - /sports (FR) / /sport (DE) — Sports page
+  // - /blog — Blog index and articles (when created)
+  // - /comparatif (FR) / /vergleich (DE) — Comparison page
+
   return entries;
 }

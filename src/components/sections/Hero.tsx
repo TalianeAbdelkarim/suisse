@@ -115,7 +115,7 @@ export default function Hero() {
                 transition={{ duration: 0.4, delay: 0.8 }}
                 className="absolute -top-3 -right-3 bg-swiss-red text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg"
               >
-                Multi-Appareils
+                {t('deviceBadge')}
               </motion.div>
             </div>
           </motion.div>

@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
     const userAgent = request.headers.get('user-agent') || 'unknown';
 
-    // Find the plan to get price and duration
+    // Find the plan in hardcoded constants for price/duration fallback
     const plan = PLANS.find((p) => p.id === plan_id);
     const planPrice = plan ? formatPrice(plan.price) : '0';
     const planDuration = plan?.duration || 0;
@@ -41,16 +41,20 @@ export async function POST(request: NextRequest) {
     try {
       const supabase = createServerClient();
 
-      // Check DB settings for a payment link override
-      const { data: settingRow } = await supabase
-        .from('settings')
-        .select('value')
-        .eq('key', `payment_link_${plan_id}`)
-        .single();
+      // Fetch the plan from DB to get the latest payment_link
+      if (plan?.slug) {
+        const { data: dbPlan } = await supabase
+          .from('plans')
+          .select('payment_link')
+          .eq('slug', plan.slug)
+          .eq('is_active', true)
+          .single();
 
-      if (settingRow?.value) {
-        paymentLink = settingRow.value;
+        if (dbPlan?.payment_link) {
+          paymentLink = dbPlan.payment_link;
+        }
       }
+
       const { data, error } = await supabase
         .from('leads')
         .insert({

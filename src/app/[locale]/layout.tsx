@@ -7,7 +7,7 @@ import { SITE_CONFIG } from '@/lib/constants';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import WhatsAppButton from '@/components/ui/WhatsAppButton';
-import CrispChat from '@/components/ui/CrispChat';
+import LiveChat from '@/components/ui/LiveChat';
 import GoogleAnalytics from '@/components/ui/GoogleAnalytics';
 
 type Props = {
@@ -32,8 +32,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     description: meta.description,
     keywords: locale === 'fr'
-      ? ['IPTV Suisse', 'abonnement IPTV', 'IPTV premium', 'chaînes suisses', 'streaming TV Suisse', 'meilleur IPTV Suisse']
-      : ['IPTV Schweiz', 'IPTV Abo', 'IPTV Premium', 'Schweizer Kanäle', 'TV Streaming Schweiz', 'bestes IPTV Schweiz'],
+      ? ['IPTV Suisse', 'IPTV Suisse 2026', 'abonnement IPTV', 'meilleur IPTV Suisse', 'abonnement IPTV pas cher', 'IPTV 4K Suisse', 'IPTV chaînes suisses', 'IPTV test gratuit', 'IPTV premium', 'chaînes suisses', 'streaming TV Suisse']
+      : ['IPTV Schweiz', 'IPTV Schweiz 2026', 'bestes IPTV Schweiz', 'IPTV Abo günstig', 'IPTV 4K Schweiz', 'Schweizer Kanäle IPTV', 'IPTV kostenlos testen', 'IPTV Abo', 'IPTV Premium', 'TV Streaming Schweiz'],
     authors: [{ name: SITE_CONFIG.name }],
     creator: SITE_CONFIG.name,
     openGraph: {
@@ -101,7 +101,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       </main>
       <Footer />
       <WhatsAppButton />
-      <CrispChat />
+      <LiveChat />
     </NextIntlClientProvider>
   );
 }
