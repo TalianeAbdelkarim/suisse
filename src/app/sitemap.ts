@@ -15,7 +15,10 @@ function localeUrl(baseUrl: string, locale: string, path: string) {
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_CONFIG.url;
   const locales = SITE_CONFIG.locales;
-  const now = new Date();
+  // Use a fixed date — update this manually when content actually changes.
+  // Dynamic new Date() caused Google "Temporary processing error" because
+  // the sitemap appeared to change on every request.
+  const lastModified = new Date('2026-02-27');
 
   // Static pages
   const staticPages = [
@@ -37,11 +40,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const page of staticPages) {
       entries.push({
         url: localeUrl(baseUrl, locale, page.path),
-        lastModified: now,
+        lastModified,
         changeFrequency: page.changeFrequency,
         priority: page.priority,
         alternates: {
           languages: {
+            'x-default': `${baseUrl}${page.path}`,
             'fr-CH': `${baseUrl}${page.path}`,
             'de-CH': `${baseUrl}/de${page.path}`,
           },
@@ -53,11 +57,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const plan of PLANS) {
       entries.push({
         url: localeUrl(baseUrl, locale, `/plans/${plan.slug}`),
-        lastModified: now,
+        lastModified,
         changeFrequency: 'weekly',
         priority: 0.9,
         alternates: {
           languages: {
+            'x-default': `${baseUrl}/plans/${plan.slug}`,
             'fr-CH': `${baseUrl}/plans/${plan.slug}`,
             'de-CH': `${baseUrl}/de/plans/${plan.slug}`,
           },
@@ -69,11 +74,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const city of ALL_CITY_SLUGS) {
       entries.push({
         url: localeUrl(baseUrl, locale, `/iptv-${city}`),
-        lastModified: now,
+        lastModified,
         changeFrequency: 'monthly',
         priority: 0.85,
         alternates: {
           languages: {
+            'x-default': `${baseUrl}/iptv-${city}`,
             'fr-CH': `${baseUrl}/iptv-${city}`,
             'de-CH': `${baseUrl}/de/iptv-${city}`,
           },
